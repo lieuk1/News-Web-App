@@ -1,0 +1,90 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  /* Center all elements */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Buttons for Top and All Headlines */
+.button {
+  border: 3px solid #333;
+  border-radius: 3px;
+  padding: 25px 35px;
+  margin: auto;
+  text-align: center;
+  background-color: white;
+  color: black;
+  font-size: 14px; /* Font size */
+  text-decoration: none;
+  transition-duration: 0.4s;
+}
+.button:hover, .button:active {
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+/* Hidden popup form for Top and All */
+.popup-top-form, .popup-all-form {
+  display: none;
+  position: absolute;
+  width: 356px;
+  border: 3px solid #333;
+  border-radius: 3px;
+  padding: 70px 0px;
+  background-color: white;
+}
+/* All input options in forms */
+.inputs {
+  display: block;
+  border: 3px solid #333;
+  border-radius: 3px;
+  width: 300px;
+  padding: 15px;
+  margin: 10px;
+  background-color: white;
+}
+.search, .close, .select {
+  width: 94%;
+  cursor: pointer;
+}
+.search, .close {
+  transition-duration: 0.4s;
+}
+.search:hover, .close:hover {
+  background-color: #333;
+  color: white;
+}
+.select option {
+  background-color: #333;
+  color: white;
+}
+/* Font size of popup form and keyword hover info */
+.inputs, .hidden {
+  font-size: 14px;
+}
+/* Keyword hover info */
+.keyword-container {
+  position: relative;
+}
+.hidden {
+  display: none;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.keyword:hover + .hidden {
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: -345px;
+  border: 1px solid #333;
+  border-radius: 3px;
+  padding: 15px;
+  width: 300px;
+  background: #333;
+  color: white;
+  text-align: justify;
+}

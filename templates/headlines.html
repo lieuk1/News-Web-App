@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/headlines.css') }}">
+</head>
+<body>
+
+<!-- Div for box shadow around main content -->
+<div class="content">
+
+<!-- Top navigation bar -->
+<div class="top-nav-container">
+    <a href="{{ url_for('home') }}" class="top-nav">Home</a>
+
+    <a href="{{ url_for('headlines', page=1) }}" class="top-nav">First</a>
+
+    {% if article_data.has_prev %}
+    <a href="{{ url_for('headlines', page=article_data.prev_num) }}" class="top-nav">Previous</a>
+    {% else %}
+    <button type="submit" class="top-nav">Previous</button>
+    {% endif %}
+
+    <!-- Current page -->
+    <p class="top-nav current-pg">{{ page }}</p>
+
+    {% if article_data.has_next %}
+    <a href="{{ url_for('headlines', page=article_data.next_num) }}" class="top-nav">Next</a>
+    {% else %}
+    <button type="submit" class="top-nav">Next</button>
+    {% endif %}
+
+    <a href="{{ url_for('headlines', page=session['last_page']) }}" class="top-nav">Last</a>
+    
+    <!-- Info about form search query -->
+    <div class="search-query-container">
+        {% if user_choice == 'top' %}
+            <p id="search-query">{{ total_results }} results for keyword={{ keyword }}, country={{ country }}, category={{ category }}</p>
+        {% else %}
+            <p id="search-query">{{ total_results }} results for keyword={{ keyword }}, language={{ language }}, sortby={{ sortby }}</p>
+        {% endif %}
+    </div>
+</div>
+
+
+<!-- Article content -->
+{% for article in article_data.items %}
+<div class="headlines">
+    <h3><a class="title" href="{{ article.url }}">{{ article.title }}</a></h3>
+    <p id="source-date-container">
+        <span id="source">by {{ article.source }}</span>
+        <span id="publish-date">{{ article.date }}</span>
+    </p>
+    <p>{{ article.description }}</p>
+</div>
+{% endfor %}
+
+
+<!-- Bottom navigation bar -->
+<div class="bottom-nav-container">
+    <a href="{{ url_for('headlines', page=1) }}" class="top-nav">First</a>
+
+    {% if article_data.has_prev %}
+    <a href="{{ url_for('headlines', page=article_data.prev_num) }}" class="top-nav">Previous</a>
+    {% else %}
+    <button type="submit" class="top-nav">Previous</button>
+    {% endif %}
+
+    <!-- Current page -->
+    <p class="top-nav current-pg">{{ page }}</p>
+
+    {% if article_data.has_next %}
+    <a href="{{ url_for('headlines', page=article_data.next_num) }}" class="top-nav">Next</a>
+    {% else %}
+    <button type="submit" class="top-nav">Next</button>
+    {% endif %}
+
+    <a href="{{ url_for('headlines', page=session['last_page']) }}" class="top-nav">Last</a>
+</div>
+
+</div> <!-- end of content div --> 
+
+</body>
+</html>

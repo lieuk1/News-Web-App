@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Test !!!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/test.css') }}">
+</head>
+<body>
+
+    <div class="sticky-nav-container">
+        <div class="logo">
+            <a href="#">
+                <img src="https://rapidapi.com/static-assets/default/logo-85082ac1-9f07-481f-97c7-538f38e56420.svg" />
+            </a>
+        </div>
+        <nav>
+            <a href="#">Link1</a>
+            <a href="#">Link2</a>
+            <a href="#">Link3</a>
+            <a href="#">Link4</a>
+        </nav>
+    </div>
+
+    <div class="search-container">
+        <h1 id="heading">Search the News Hub</h1>
+        <div class="button-container">
+            <button class="button" id="top-headline-btn" onclick="openForm('my-top-form')">Search Trending</button>
+            <button class="button" id="all-headline-btn" onclick="openForm('my-all-form')">Search Everything</button>
+        </div>
+        <!-- Popup form for top headlines -->
+        <div class="popup-top-form" id="my-top-form">
+            <form class="top-form" action="{{ url_for('headlines') }}" method="POST">
+                <input type="text" class="inputs keyword" name="keyword" placeholder="Enter optional keyword(s)">
+
+                <select class="inputs select" id="category" name="category" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="general">All</option>
+                    <option value="business">Business</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="health">Health</option>
+                    <option value="science">Science</option>
+                    <option value="sports">Sports</option>
+                    <option value="technology">Technology</option>
+                </select>
+
+                <input type="submit" class="inputs search" name="submit" value="Search Trending">
+                <input type="button" class="inputs close" value="Close" onclick="closeForm('my-top-form')">
+            </form>
+        </div>
+        <!-- Popup form for all headlines -->
+        <div class="popup-all-form" id="my-all-form">
+            <form class="all-form" action="{{ url_for('headlines') }}" method="POST">
+                <input type="text" class="inputs keyword" name="keyword" placeholder="Enter keyword(s)" required>
+
+                <select class="inputs select" id="sortby" name="sortby" required>
+                    <option value="" disabled selected>Select a sorting</option>
+                    <option value="popularity">Popularity</option>
+                    <option value="relevancy">Relevancy</option>
+                    <option value="publishedAt">Newest</option>
+                </select>
+
+                <input type="submit" class="inputs search" name="submit" value="Search Everything">
+                <input type="button" class="inputs close" value="Close" onclick="closeForm('my-all-form')">
+            </form>
+        </div>
+    </div>
+
+    <div class="flex-container">
+        <h1>Popular Searches</h1>
+        <div>Card 1</div>
+        <div>Card 2</div>
+        <div>Card 3</div>
+    </div>
+
+    <div class="flex-container">
+        <h1>Top Articles in the US Today</h1>
+        <div>Card 1</div>
+        <div>Card 2</div>
+        <div>Card 3</div>
+    </div>
+
+    <div class="flex-container">
+        <h1>Top Articles in the US Today</h1>
+        <div>Card 1</div>
+        <div>Card 2</div>
+        <div>Card 3</div>
+    </div>
+
+    <div class="flex-container">
+        <h1>Top Articles in the US Today</h1>
+        <div>Card 1</div>
+        <div>Card 2</div>
+        <div>Card 3</div>
+    </div>
+
+    <div class="footer">
+        <p>Footer</p>
+    </div>
+
+<!-- Put all JS in separate file -->
+<script>
+    function openForm(form_id) {
+        hideButtons()
+        document.getElementById(form_id).style.display = "block";
+    }
+    function closeForm(form_id) {
+        document.getElementById(form_id).style.display = "none";
+        showButtons()
+    }
+    function showButtons() {
+        document.getElementById("top-headline-btn").style.display = "inline";
+        document.getElementById("heading").style.display = "block";
+        document.getElementById("all-headline-btn").style.display = "inline";
+    }
+    function hideButtons() {
+        document.getElementById("top-headline-btn").style.display = "none";
+        document.getElementById("heading").style.display = "none";
+        document.getElementById("all-headline-btn").style.display = "none";
+    }
+</script>
+
+</body>
+</html>

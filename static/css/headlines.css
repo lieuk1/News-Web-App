@@ -1,0 +1,120 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Container for ALL content */
+.content {
+  /* Width of ALL content */
+  width: 90%;
+  min-height: 100%;
+  margin: auto;
+  text-align: center;
+  /* Content box shadow */
+  box-shadow: 0px 0px 30px 0px lightgrey;
+}
+/* Top and bottom navigation bars */
+.top-nav-container, .bottom-nav-container {
+  border: 0px solid black;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.top-nav-container {
+  /* First horizontal separator */
+  border-bottom: 1px solid lightgrey;
+  padding: 20px 0px 15px 0px;
+}
+.bottom-nav-container {
+  padding: 15px 0px 20px 0px;
+}
+/* Top and bottom navigation buttons */
+.top-nav, .bottom-nav {
+  border: 2px solid #333;
+  border-radius: 3px;
+  margin: 0px 2px;
+  padding: 2px 5px;
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: black;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.top-nav:link, .top-nav:visited,
+.bottom-nav:link, .bottom-nav:visited {
+  color: black;
+  text-decoration: none;
+}
+.top-nav:hover, .top-nav:active {
+  background-color: #333;
+  color: white;
+}
+/* Current page in navigation bars */
+.current-pg {
+  cursor: default;
+}
+.current-pg:hover {
+  background-color: white;
+  color: black;
+}
+/* Search query info */
+.top-nav-container {
+  position: relative;
+}
+.search-query-container {
+  border: 0px solid red;
+  position: absolute;
+  bottom: 19px;
+  right: 0px;
+}
+#search-query {
+  border: 0px solid black;
+  padding: 0px;
+  margin: auto;
+  text-align: right;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-style: italic;
+}
+/* Article content */
+.headlines {
+  border: 0px solid black;
+  border-bottom: 1px solid lightgrey;
+  padding: 15px 0px;
+  margin: auto;
+  text-align: justify;
+}
+.headlines h3, .headlines p {
+  width: 65%;
+  margin: auto;
+}
+.headlines h3 {
+  padding: 10px 0px;
+}
+.headlines p {
+  padding: 20px 0px;
+}
+.title:link, .title:visited {
+  color: black;
+  text-decoration: none;
+}
+.title:hover, .title:active {
+  text-decoration: underline;
+}
+#source-date-container {
+  padding: 0px;
+  font-size: 11px;
+  color: #696969;
+}
+#source {
+  margin: 0px;
+  padding: 0px;
+  text-align: left;
+}
+#publish-date {
+  float: right;
+}
