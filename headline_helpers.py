@@ -7,17 +7,17 @@ from news import get_top, get_everything, get_headline_info  # news.py
 
 # INSERT ARTICLES INTO DATABASE
 def insert_headlines(user_choice, article_tuple):
-    for title, description, source, date, url in article_tuple:
+    for author, title, description, source, publish_date, url, url_to_image in article_tuple:
         if user_choice == 'top':
             # Remove source from end of title
             hyphen_index = title.rfind(' - ')
             title = title[:hyphen_index]
 
-        # Remove info from end of date
-        time_index = date.rfind('T')
-        date = date[:time_index]
+        # Remove info from end of publish_date
+        time_index = publish_date.rfind('T')
+        publish_date = publish_date[:time_index]
 
-        article = Article(title, description, source, date, url)
+        article = Article(author, title, description, source, publish_date, url, url_to_image)
         db.session.add(article)
 
     db.session.commit()
@@ -40,7 +40,6 @@ def request_headlines():
         # top_headlines = get_top(session['keyword'], session['country'], session['category'])
         top_headlines = get_top(session['keyword'], session['category'])
         article_tuple = get_headline_info(top_headlines)
-        session['total_results'] = top_headlines['totalResults']
 
         insert_headlines(session['user_choice'], article_tuple)
 
@@ -54,14 +53,8 @@ def request_headlines():
         # Get article data from News API
         all_articles = get_everything(session['keyword'], session['sortby'])
         article_tuple = get_headline_info(all_articles)
-        session['total_results'] = all_articles['totalResults']
 
         insert_headlines(session['user_choice'], article_tuple)
 
     if session['keyword'] == '':
         session['keyword'] = 'none'
-    if session['total_results'] > 100:  # News API allows 100 max results for developers
-        session['total_results'] = 100
-
-    # Calculate last page number
-    session['last_page'] = math.ceil(session['total_results'] / RESULTS_PER_PAGE)

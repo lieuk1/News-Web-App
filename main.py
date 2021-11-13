@@ -27,8 +27,7 @@ search query info reveal on button click
 remove bottom nav, sticky top nav
 """
 
-
-@app.route("/test")
+@app.route("/")
 def home():
     countries = list_countries()
     languages = list_languages()
@@ -41,11 +40,6 @@ def home():
                            languages=languages)
 
 
-@app.route("/test")
-def test():
-    return render_template("test.html")
-
-
 @app.route("/headlines", methods=['GET', 'POST'], defaults={'page': 1})
 @app.route("/headlines/<int:page>", methods=['GET', 'POST'])
 def headlines(page):
@@ -54,27 +48,17 @@ def headlines(page):
         request_headlines()
 
     if session.get('user_choice') is not None:
+        page = request.args.get('page', page, type=int)
         article_data = Article.query.paginate(page, RESULTS_PER_PAGE, False)
-
-        if article_data.has_next:
-            next_url = url_for('headlines', page=article_data.next_num)
-        else:
-            next_url = None
-        if article_data.has_prev:
-            prev_url = url_for('headlines', page=article_data.prev_num)
-        else:
-            prev_url = None
+        total_results = len(Article.query.all())
 
         if session['user_choice'] == 'top':
             return render_template("headlines.html",
                                    title='Trending and Breaking News',
                                    user_choice=session['user_choice'],
                                    article_data=article_data,
-                                   next_url=next_url,
-                                   prev_url=prev_url,
                                    page=page,
-                                   last_page=session['last_page'],
-                                   total_results=session['total_results'],
+                                   total_results=total_results,
                                    keyword=session['keyword'],
                                    category=session['category'])
         elif session['user_choice'] == 'all':
@@ -82,14 +66,10 @@ def headlines(page):
                                    title='Everything You Need',
                                    user_choice=session['user_choice'],
                                    article_data=article_data,
-                                   next_url=next_url,
-                                   prev_url=prev_url,
                                    page=page,
-                                   last_page=session['last_page'],
-                                   total_results=session['total_results'],
+                                   total_results=total_results,
                                    keyword=session['keyword'],
                                    sortby=session['sortby'])
-
     else:
         return redirect(url_for('home'))
 

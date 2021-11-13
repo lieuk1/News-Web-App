@@ -27,19 +27,23 @@ def get_everything(keyword, sortby):
 
 
 def get_headline_info(articles):
+    authors = []
     titles = []
     descriptions = []
     sources = []
-    dates = []
+    publish_dates = []
     urls = []
+    urls_to_image = []
 
     for article in articles['articles']:
+        authors.append(article['author'])
         titles.append(article['title'])
         descriptions.append(article['description'])
         sources.append(article['source']['name'])
-        dates.append(article['publishedAt'])
+        publish_dates.append(article['publishedAt'])
         urls.append(article['url'])
+        urls_to_image.append(article['urlToImage'])
 
-    article_tuple = zip(titles, descriptions, sources, dates, urls)
+    article_tuple = zip(authors, titles, descriptions, sources, publish_dates, urls, urls_to_image)
 
     return article_tuple
