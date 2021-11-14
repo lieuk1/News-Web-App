@@ -1,5 +1,9 @@
+import os
 from newsapi import NewsApiClient
-newsapi = NewsApiClient(api_key='')
+from dotenv import load_dotenv
+load_dotenv()
+
+newsapi = NewsApiClient(api_key=os.environ['api_key'])
 
 """
 KEYWORD(S) FORMAT -> 'KEYWORD, KEYWORD'
