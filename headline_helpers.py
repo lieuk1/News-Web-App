@@ -1,6 +1,4 @@
 from flask import request, session
-import math
-from config import RESULTS_PER_PAGE  # config.py
 from database import db, Article  # database.py
 from news import get_top, get_everything, get_headline_info  # news.py
 
