@@ -10,21 +10,47 @@ html, body {
 }
 /* Buttons for Top and All Headlines */
 .button {
-  border: 3px solid #333;
+  border: 0;
   border-radius: 3px;
-  padding: 25px 35px;
+  padding: 16px 26px;
   margin: auto;
   text-align: center;
   background-color: white;
-  color: black;
   font-size: 14px; /* Font size */
-  text-decoration: none;
-  transition-duration: 0.4s;
+  transition: all .2s ease-in-out;
+}
+.button span {
+  background: linear-gradient(to right, lightblue, blue);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  letter-spacing: 0.02em;
+}
+.button2 span {
+  background: linear-gradient(to right, blue, lightblue);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 .button:hover, .button:active {
-  background-color: #333;
-  color: white;
   cursor: pointer;
+}
+
+.button1-border-wrap,
+.button2-border-wrap {
+  display: inline-block;
+  background: linear-gradient(to right, lightblue, blue);
+  padding: 4px;
+  border-radius: 6px;
+  /* transition: all .5s ease-in-out; */
+}
+.button2-border-wrap {
+  background: linear-gradient(to right, blue, lightblue);
+  margin-left: 10px;
+}
+.button1-border-wrap:hover,
+.button2-border-wrap:hover {
+  /* transform: scale(1.1); */
 }
 /* Hidden popup form for Top and All */
 .popup-top-form, .popup-all-form {

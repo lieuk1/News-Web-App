@@ -34,7 +34,7 @@ def home():
 
     session.pop('user_choice', None)
 
-    return render_template("test.html",
+    return render_template("home.html",
                            title='Worldwide News Headlines',
                            countries=countries,
                            languages=languages)
