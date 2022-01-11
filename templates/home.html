@@ -9,13 +9,13 @@
 <!-- Buttons for Top Headlines and All Headlines -->
 <div class="btn-container">
     <ul>
-        <li>
+        <li id="trending-btn" value="trending-btn" onclick="openForm('my-top-form')">
             Trending
-            <!-- Number of span equals number of bubbles on hover -->
+            <!-- Number of span equals number of bubbles that appear on hover -->
             <span></span><span></span>
             <span></span><span></span>
         </li>
-        <li>
+        <li id="everything-btn" value="everything-btn" onclick="openForm('my-all-form')">
             Everything
             <span></span><span></span>
             <span></span><span></span>
@@ -104,12 +104,12 @@
         showButtons()
     }
     function showButtons() {
-        document.getElementById("top-headline-btn").style.display = "inline";
-        document.getElementById("all-headline-btn").style.display = "inline";
+        document.getElementById("trending-btn").style.display = "inline-block";
+        document.getElementById("everything-btn").style.display = "inline-block";
     }
     function hideButtons() {
-        document.getElementById("top-headline-btn").style.display = "none";
-        document.getElementById("all-headline-btn").style.display = "none";
+        document.getElementById("trending-btn").style.display = "none";
+        document.getElementById("everything-btn").style.display = "none";
     }
 </script>
 

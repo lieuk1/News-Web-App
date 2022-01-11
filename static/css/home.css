@@ -49,6 +49,7 @@ html, body {
 }
 .btn-container ul li:hover {
   color: white;
+  cursor: pointer;
 }
 .btn-container ul li:hover span {
   /* Make bubbles appear when hover */
