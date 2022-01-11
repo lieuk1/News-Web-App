@@ -5,6 +5,9 @@ KRISTELLA LIEU
 
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_session import Session
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired
 
 from database import db, Article  # database.py
 from dbconfig import Config  # dbconfig.py
