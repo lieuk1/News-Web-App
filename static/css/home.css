@@ -8,13 +8,13 @@ html, body {
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 .btn-container ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 .btn-container ul li {
+  /* Buttons */
   --accent: #70a9a1;
   display: inline-block;
   border: 0.2em solid var(--accent);
@@ -27,6 +27,48 @@ html, body {
   height: 2.5em;
   font-size: 16px;
   font-weight: bold;
+  position: relative;
+  z-index: 1;
+  overflow: hidden; /* Hides span elements */
+  transition: 0.5s;
+}
+.btn-container ul li span {
+  /* Bubbles */
+  width: 25%;
+  height: 100%;
+  background-color: var(--accent);
+  border-radius: 50%;
+  position: absolute;
+  /* Calc position of each span based on its number */
+  left: calc((var(--n) - 1) * 25%); 
+  transform: translateY(150%);
+  transition: 0.5s;
+  /* Calc trans delay of each span based on its number */
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+.btn-container ul li:hover {
+  color: white;
+}
+.btn-container ul li:hover span {
+  /* Make bubbles appear when hover */
+  transform: translateY(0) scale(2);
+}
+.btn-container ul li span:nth-child(1) {
+  /* First bubble */
+  --n: 1; 
+}
+.btn-container ul li span:nth-child(2) {
+  /* Second bubble */
+  --n: 2;
+}
+.btn-container ul li span:nth-child(3) {
+  /* Third bubble */
+  --n: 3;
+}
+.btn-container ul li span:nth-child(4) {
+  /* Fourth bubble */
+  --n: 4;
 }
 /* Buttons for Top and All Headlines */
 .button {
@@ -67,10 +109,6 @@ html, body {
 .button2-border-wrap {
   background: linear-gradient(to right, blue, lightblue);
   margin-left: 10px;
-}
-.button1-border-wrap:hover,
-.button2-border-wrap:hover {
-  /* transform: scale(1.1); */
 }
 /* Hidden popup form for Top and All */
 .popup-top-form, .popup-all-form {
