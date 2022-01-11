@@ -1,12 +1,32 @@
 html, body {
   height: 100%;
   width: 100%;
-  margin: 0px;
+  margin: 0;
   /* Center all elements */
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-container ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.btn-container ul li {
+  --accent: #70a9a1;
+  display: inline-block;
+  border: 0.2em solid var(--accent);
+  border-radius: 0.4em;
+  color: var(--accent);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 2.5em;
+  width: 10em;
+  height: 2.5em;
+  font-size: 16px;
+  font-weight: bold;
 }
 /* Buttons for Top and All Headlines */
 .button {
