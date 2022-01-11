@@ -6,7 +6,7 @@ KRISTELLA LIEU
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_session import Session
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired
 
 from database import db, Article  # database.py
@@ -30,13 +30,22 @@ search query info reveal on button click
 remove bottom nav, sticky top nav
 """
 
-@app.route("/")
+class TrendingForm(FlaskForm):
+    keyword = StringField('keyword')
+    country = SelectField('country', choices=list_countries())
+    category = SelectField('category', 
+        choices=['general', 'business', 'entertainment', 'health', 'science', 'sports', 'technology'])
+
+@app.route("/", methods=['GET', 'POST'])
 def home():
     countries = list_countries()
     languages = list_languages()
 
     session.pop('user_choice', None)
-
+    
+    trending_form = TrendingForm()
+    if trending_form.validate_on_submit():
+        return render_template('headlines.html')
     return render_template("home.html",
                            title='Worldwide News Headlines',
                            countries=countries,
@@ -79,4 +88,4 @@ def headlines(page):
 
 if __name__ == '__main__':
     db.create_all()
-    app.run()
+    app.run(debug=True)
