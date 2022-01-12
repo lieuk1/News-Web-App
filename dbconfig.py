@@ -5,4 +5,5 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SESSION_TYPE = 'filesystem'  # Log session info to a file
     DEBUG = True
+    TEMPLATES_AUTO_RELOAD = True
     SECRET_KEY = '\xaf\x0c7*\xcb\x0e\x8f\xc7M9Q\x9b\x83\r\xbe\xec\xe4\xbe\xfc\xd1\xfd\xe4YT'

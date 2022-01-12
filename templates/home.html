@@ -21,45 +21,15 @@
             <span></span><span></span>
         </li>
     </ul>
-    <!-- <div class="button1-border-wrap">
-        <button class="button button1" id="top-headline-btn" onclick="openForm('my-top-form')">
-            <span>Top Headlines</span>
-        </button>
-    </div>
-    <div class="button2-border-wrap">
-        <button class="button button2" id="all-headline-btn" onclick="openForm('my-all-form')">
-            <span>All Headlines</span>
-        </button>
-    </div> -->
 </div>
 
 <!-- Popup form for top headlines -->
 <div class="popup-top-form" id="my-top-form">
-    <form class="top-form" action="{{ url_for('headlines') }}" method="POST">
-        <div class="keyword-container">
-            <input type="text" class="inputs keyword" name="keyword" placeholder="Enter keyword(s) [optional]">
-            <!-- Hidden info popup for keyword search bar -->
-            <div class="hidden">Keywords or phrases to search for in the article title and body.</div>
-        </div>
-
-        <select class="inputs select" id="country" name="country" required>
-            <option value="" disabled selected>Select a country</option>
-            {% for country in countries %}
-            <option value="{{country[1]}}">{{country[0]}}</option>
-            {% endfor %}
-        </select>
-
-        <select class="inputs select" id="category" name="category" required>
-            <option value="" disabled selected>Select a category</option>
-            <option value="general">All</option>
-            <option value="business">Business</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="health">Health</option>
-            <option value="science">Science</option>
-            <option value="sports">Sports</option>
-            <option value="technology">Technology</option>
-        </select>
-
+    <form method="POST" action="" class="top-form">
+        {{ trending_form.csrf_token }}  
+        {{ trending_form.keyword(class_=trending_form.keyword.description.class,
+            placeholder_=trending_form.keyword.description.placeholder) }}
+        {{ trending_form.category(class_=trending_form.category.description.class) }}
         <input type="submit" class="inputs search" name="submit" value="Search Trending">
         <input type="button" class="inputs close" value="Close" onclick="closeForm('my-top-form')">
     </form>

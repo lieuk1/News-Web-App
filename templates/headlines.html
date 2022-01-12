@@ -34,17 +34,9 @@
 
             <!-- Info about form search query -->
             <div class="search-query-container">
-                {% if user_choice == 'top' %}
                 <p id="search-query">{{ total_results }} results 
-                    for keyword={{ keyword }}, country={{ country }},
-                    category={{ category }}
+                    for keyword={{ keyword }}, category={{ category }}
                 </p>
-                {% else %}
-                <p id="search-query">{{ total_results }} results 
-                    for keyword={{ keyword }}, language={{ language }},
-                    sortby={{ sortby }}
-                </p>
-                {% endif %}
             </div>
         </div>
 
