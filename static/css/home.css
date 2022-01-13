@@ -2,11 +2,18 @@ html, body {
   height: 100%;
   width: 100%;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.landing-container {
+  height: 100vh;
+  width: 100%;
+  background-image: url("../landing-bg.jpg");
+  background-size: cover;
+  background-position: center;
   /* Center all elements */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
 }
 .btn-container ul {
   list-style-type: none;
@@ -15,10 +22,11 @@ html, body {
 }
 .btn-container ul li {
   /* Buttons */
-  --accent: #70a9a1;
+  --accent: white;
+  /* --accent: #70a9a1; */
   display: inline-block;
-  border: 0.2em solid var(--accent);
-  border-radius: 0.4em;
+  border: 0.1em solid var(--accent);
+  border-radius: 0.1em;
   color: var(--accent);
   text-transform: uppercase;
   text-align: center;
@@ -48,7 +56,8 @@ html, body {
   z-index: -1;
 }
 .btn-container ul li:hover {
-  color: white;
+  /* color: white; */
+  color: #233863;
   cursor: pointer;
 }
 .btn-container ul li:hover span {
@@ -71,46 +80,96 @@ html, body {
   /* Fourth bubble */
   --n: 4;
 }
-/* Buttons for Top and All Headlines */
-.button {
-  border: 0;
-  border-radius: 3px;
-  padding: 16px 26px;
-  margin: auto;
-  text-align: center;
+.category-btns-container {
+  height: 100px;
+  background-color: transparent;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: absolute;
+  bottom: 0;
+}
+.categ-bub-cont {
+  height: 100%;
+  width: 480px;
+  position: relative;
+}
+.categ-bub-cont span {
+  width: 77px;
+  height: 100%;
+  border: 0.1em solid white;
+  background-color: transparent;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  position: absolute;
+  left: calc((var(--z) - 1) * 16.67%);
+  transform: translateY(50%);
+  transition: 0.5s;
+}
+.categ-bub-cont span:hover {
+  transform: translateY(40%);
   background-color: white;
-  font-size: 14px; /* Font size */
-  transition: all .2s ease-in-out;
-}
-.button span {
-  background: linear-gradient(to right, lightblue, blue);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  letter-spacing: 0.02em;
-}
-.button2 span {
-  background: linear-gradient(to right, blue, lightblue);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-}
-.button:hover, .button:active {
   cursor: pointer;
 }
+.categ-bub-cont span p {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -45px;
+  text-align: center;
+  color: white;
+  transition: 0.5s;
+  opacity: 0%;
+}
+.categ-bub-cont span:hover p {
+  opacity: 100%;
+  cursor: default;
+}
+.categ-bub-cont span:nth-child(1) {
+  --z: 1;
+}
+.categ-bub-cont span:nth-child(2) {
+  --z: 2;
+}
+.categ-bub-cont span:nth-child(3) {
+  --z: 3;
+}
+.categ-bub-cont span:nth-child(4) {
+  --z: 4;
+}
+.categ-bub-cont span:nth-child(5) {
+  --z: 5;
+}
+.categ-bub-cont span:nth-child(6) {
+  --z: 6;
+}
+.content-container {
+  background-color: white;
+}
+.content-container p {
+  margin: 0;
+  padding: 0;
+  margin-top: 1.5em;
+  margin-left: 1em;
+}
+.content-container p span {
+  --accent: #70a9a1;
+  border: 0.01em solid var(--accent);
+  border-radius: 18px;
+  padding: 8px;
+  color: var(--accent);
+}
+.carousal-container {
+  height: 200px;
+}
+.footer-container {
+  height: 25vh;
+  background-color: black;
+}
 
-.button1-border-wrap,
-.button2-border-wrap {
-  display: inline-block;
-  background: linear-gradient(to right, lightblue, blue);
-  padding: 4px;
-  border-radius: 6px;
-  /* transition: all .5s ease-in-out; */
-}
-.button2-border-wrap {
-  background: linear-gradient(to right, blue, lightblue);
-  margin-left: 10px;
-}
+
 /* Hidden popup form for Top and All */
 .popup-top-form, .popup-all-form {
   display: none;

@@ -5,63 +5,60 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 <body>
-
-<!-- Buttons for Top Headlines and All Headlines -->
-<div class="btn-container">
-    <ul>
-        <li id="trending-btn" value="trending-btn" onclick="openForm('my-top-form')">
-            Trending
-            <!-- Number of span equals number of bubbles that appear on hover -->
-            <span></span><span></span>
-            <span></span><span></span>
-        </li>
-        <li id="everything-btn" value="everything-btn" onclick="openForm('my-all-form')">
-            Everything
-            <span></span><span></span>
-            <span></span><span></span>
-        </li>
-    </ul>
-</div>
-
-<!-- Popup form for top headlines -->
-<div class="popup-top-form" id="my-top-form">
-    <form method="POST" action="" class="top-form">
-        {{ trending_form.csrf_token }}  
-        {{ trending_form.keyword(class_=trending_form.keyword.description.class,
-            placeholder_=trending_form.keyword.description.placeholder) }}
-        {{ trending_form.category(class_=trending_form.category.description.class) }}
-        <input type="submit" class="inputs search" name="submit" value="Search Trending">
-        <input type="button" class="inputs close" value="Close" onclick="closeForm('my-top-form')">
-    </form>
-</div>
-
-<!-- Popup form for all headlines -->
-<div class="popup-all-form" id="my-all-form">
-    <form class="all-form" action="{{ url_for('headlines') }}" method="POST">
-        <div class="keyword-container">
-            <input type="text" class="inputs keyword" name="keyword" placeholder="Enter keyword(s)" required>
-            <!-- Hidden info popup for keyword search bar -->
-            <div class="hidden">Keywords or phrases to search for in the article title and body.</div>
+    <div class="landing-container">
+        <!-- Button for trending headlines -->
+        <div class="btn-container">
+            <ul>
+                <li id="trending-btn" value="trending-btn" onclick="openForm('my-top-form')">
+                    Trending
+                    <!-- Number of span equals number of bubbles that appear on hover -->
+                    <span></span><span></span>
+                    <span></span><span></span>
+                </li>
+            </ul>
         </div>
-
-        <select class="inputs select" id="language" name="language" required>
-            <option value="" disabled selected>Select a language</option>
-            {% for language in languages %}
-            <option value="{{language[1]}}">{{language[0]}}</option>
-            {% endfor %}
-        </select>
-        
-        <select class="inputs select" id="sortby" name="sortby" required>
-            <option value="" disabled selected>Select a sorting</option>
-            <option value="popularity">Popularity</option>
-            <option value="relevancy">Relevancy</option>
-            <option value="publishedAt">Newest</option>
-        </select>
-
-        <input type="submit" class="inputs search" name="submit" value="Search Everything">
-        <input type="button" class="inputs close" value="Close" onclick="closeForm('my-all-form')">
-    </form>
-</div>
+        <!-- Form for trending headlines -->
+        <div class="popup-top-form" id="my-top-form">
+            <form method="POST" action="" class="top-form">
+                {{ trending_form.csrf_token }}  
+                {{ trending_form.keyword(class_=trending_form.keyword.description.class,
+                    placeholder_=trending_form.keyword.description.placeholder) }}
+                {{ trending_form.category(class_=trending_form.category.description.class) }}
+                <input type="submit" class="inputs search" name="submit" value="Search Trending">
+                <input type="button" class="inputs close" value="Close" onclick="closeForm('my-top-form')">
+            </form>
+        </div>
+        <div class="category-btns-container">
+            <div class="categ-bub-cont">
+                <span><p>Health</p></span>
+                <span><p>Science</p></span>
+                <span><p>Entertainment</p></span>
+                <span><p>Technology</p></span>
+                <span><p>Business</p></span>
+                <span><p>Sports</p></span>
+            </div>
+        </div>
+    </div>
+    <div class="content-container">
+        <p><span>Top Trending</span></p>
+        <div class="carousal-container"></div>
+        <p><span>Health</span></p>
+        <div class="carousal-container"></div>
+        <p><span>Science</span></p>
+        <div class="carousal-container"></div>
+        <p><span>Entertainment</span></p>
+        <div class="carousal-container"></div>
+        <p><span>Technology</span></p>
+        <div class="carousal-container"></div>
+        <p><span>Business</span></p>
+        <div class="carousal-container"></div>
+        <p><span>Sports</span></p>
+        <div class="carousal-container"></div>
+    </div>
+    <div class="footer-container">
+        <a href="/">Link</a>
+        <a href="/">Link</a>
+    </div>
 
 <!-- Put all JS in separate file -->
 <script>
@@ -75,11 +72,9 @@
     }
     function showButtons() {
         document.getElementById("trending-btn").style.display = "inline-block";
-        document.getElementById("everything-btn").style.display = "inline-block";
     }
     function hideButtons() {
         document.getElementById("trending-btn").style.display = "none";
-        document.getElementById("everything-btn").style.display = "none";
     }
 </script>
 
