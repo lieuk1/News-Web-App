@@ -5,7 +5,9 @@ db = SQLAlchemy()
 
 # ARTICLE DATABASE MODEL
 class Article(db.Model):
+    __tablename__ = 'articles'
     id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(50))
     author = db.Column(db.String(100))
     title = db.Column(db.String(500))
     description = db.Column(db.String(500))
@@ -14,7 +16,8 @@ class Article(db.Model):
     url = db.Column(db.String(500))
     url_to_image = db.Column(db.String(500))
 
-    def __init__(self, author, title, description, source, publish_date, url, url_to_image):
+    def __init__(self, category, author, title, description, source, publish_date, url, url_to_image):
+        self.category = category
         self.author = author
         self.title = title
         self.description = description

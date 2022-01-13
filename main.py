@@ -20,6 +20,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db.app = app
 db.init_app(app)
+db.create_all()
 
 Session(app)
 
@@ -96,5 +97,4 @@ def headlines(page):
 
 
 if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True, use_reloader=True)
+    app.run(debug=True)
