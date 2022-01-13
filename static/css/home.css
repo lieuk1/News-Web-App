@@ -126,6 +126,7 @@ html, body {
 .categ-bub-cont span:hover p {
   opacity: 100%;
   cursor: default;
+  pointer-events: none;
 }
 .categ-bub-cont span:nth-child(1) {
   --z: 1;
