@@ -1,6 +1,6 @@
 import sqlite3
 from sqlite3 import Error
-from headline_helpers import request_headlines
+from news import request_headlines
 
 
 def create_connection(db_file):
@@ -34,6 +34,20 @@ def clear_table(conn):
     cur = conn.cursor()
     cur.execute(sql)
     conn.commit()
+    
+    
+def update_article(article):
+    list_article = list(article)
+    publish_date = list_article[5]
+    
+    # Remove info from end of publish_date
+    time_index = publish_date.rfind('T')
+    new_date = publish_date[:time_index]
+    
+    list_article[5] = new_date
+    article = tuple(list_article)
+    
+    return article
 
 
 def main():
@@ -50,6 +64,7 @@ def main():
         for category in categories:
             articles = request_headlines(category)
             for article in articles:
+                article = update_article(article)
                 article_id = insert_article(conn, article)
         
 

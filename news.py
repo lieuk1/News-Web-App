@@ -1,5 +1,4 @@
 import os
-from unicodedata import category
 from newsapi import NewsApiClient
 from dotenv import load_dotenv
 load_dotenv()
@@ -20,14 +19,6 @@ def get_top(category):
         page=1)
     return top_headlines
 
-
-def get_everything(keyword, sortby):
-    all_articles = newsapi.get_everything(
-        q=keyword,
-        sort_by=sortby,
-        page_size=100,
-        page=1)
-    return all_articles
 
 
 def get_headline_info(articles, category):
@@ -52,4 +43,12 @@ def get_headline_info(articles, category):
 
     article_tuple = zip(categories, authors, titles, descriptions, sources, publish_dates, urls, urls_to_image)
 
+    return article_tuple
+
+
+
+def request_headlines(category):
+    top_headlines = get_top(category)
+    article_tuple = get_headline_info(top_headlines, category)
+    
     return article_tuple

@@ -13,7 +13,6 @@ from wtforms.validators import DataRequired, Optional
 from database import db, Article  # database.py
 from dbconfig import Config  # dbconfig.py
 from countries_languages import list_countries, list_languages  # countries_languages.py
-from headline_helpers import request_headlines  # headline_helpers.py
 from config import RESULTS_PER_PAGE  # config.py
 
 app = Flask(__name__)
