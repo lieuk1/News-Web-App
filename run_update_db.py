@@ -38,6 +38,7 @@ def clear_table(conn):
 
 def main():
     database = "articles.db"
+    categories = ["general", "health", "science", "entertainment", "technology", "business", "sports"]
     
     # Create a db connection
     conn = create_connection(database)
@@ -46,9 +47,10 @@ def main():
         clear_table(conn)
         
         # Retrieve new articles
-        articles = request_headlines()
-        for article in articles:
-            article_id = insert_article(conn, article)
+        for category in categories:
+            articles = request_headlines(category)
+            for article in articles:
+                article_id = insert_article(conn, article)
         
 
 if __name__ == '__main__':

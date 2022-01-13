@@ -22,7 +22,7 @@ def insert_headlines(user_choice, article_tuple):
 
 
 # REQUEST ARTICLES FROM NEWS API
-def request_headlines():
+def request_headlines(category):
     # Clear all data in database for new search
     # Article.query.delete()
     # db.session.commit()
@@ -37,8 +37,8 @@ def request_headlines():
     # Get article data from News API
     # top_headlines = get_top(session['keyword'], session['country'], session['category'])
     
-    top_headlines = get_top("general")
-    article_tuple = get_headline_info(top_headlines, "general")
+    top_headlines = get_top(category)
+    article_tuple = get_headline_info(top_headlines, category)
     
     return article_tuple
 
