@@ -42,10 +42,11 @@ class TrendingForm(FlaskForm):
 @app.route("/", methods=['GET', 'POST'], defaults={'page': 1})
 def home(page):
     trending_form = TrendingForm()
+    article_data = Article.query.filter_by(category="general").paginate(page, 5, False)
     
     if trending_form.validate_on_submit():
         page = request.args.get('page', page, type=int)
-        article_data = Article.query.paginate(page, RESULTS_PER_PAGE, False)
+        article_data = Article.query.filter_by(category="general").paginate(page, RESULTS_PER_PAGE, False)
         total_results = len(Article.query.all())
         
         return render_template('headlines.html',
@@ -57,7 +58,8 @@ def home(page):
             total_results=total_results)
     return render_template('home.html',
         title='News',
-        trending_form=trending_form)
+        trending_form=trending_form,
+        article_data=article_data)
 
 
 @app.route('/headlines', methods=['GET', 'POST'])
@@ -69,7 +71,7 @@ def headlines(page):
 
     # if session.get('user_choice') is not None:
     # page = request.args.get('page', page, type=int)
-    article_data = Article.query.paginate(page, RESULTS_PER_PAGE, False)
+    article_data = Article.query.filter_by(category="health").paginate(page, RESULTS_PER_PAGE, False)
     total_results = len(Article.query.all())
 
     # if session['user_choice'] == 'top':

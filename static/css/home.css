@@ -108,6 +108,31 @@ html, body {
   border: 1px solid #222;
   color: #222;
 }
+
+.trend-row-con {
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.trend-article {
+  border: 0.1em solid white;
+  border-radius: 50px;
+  color: white;
+  margin: 12px;
+  padding: 20px;
+  height: 260px;
+}
+.trend-article h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+.trend-article h3 a {
+  text-decoration: none;
+  color: white;
+}
+
+
 .category-btns-container {
   height: 100px;
   background-color: transparent;
@@ -174,6 +199,7 @@ html, body {
 .categ-bub-cont span:nth-child(6) {
   --z: 6;
 }
+
 .content-container {
   background-color: white;
 }
