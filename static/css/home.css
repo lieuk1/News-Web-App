@@ -116,17 +116,20 @@ html, body {
   left: 0;
 }
 .trend-article {
-  border: 0.1em solid transparent;
-  border-radius: 50px;
+  border-radius: 0 0 50px 50px;
   color: white;
-  margin: 12px;
-  /* padding: 20px; */
+  margin: 0 12px 12px 12px;
   padding: 0;
   height: 260px;
   overflow: hidden;
   position: relative;
+  transform: translateY(-50%);
+  transition: 0.5s;
 }
-.trend-article p {
+.trend-article:hover {
+  transform: translateY(0);
+}
+.trend-article-content {
   font-size: 18px;
   font-weight: bold;
   color: white;
@@ -138,10 +141,16 @@ html, body {
   bottom: 0;
   left: 0;
   pointer-events: none; 
+  height: 142px;
+  width: 100%;
 }
-.trend-article p span {
+.trend-article-content p {
   display: block;
   line-height: 1.3em;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .trend-article img {
   width: 100%;
@@ -154,6 +163,9 @@ html, body {
   font-weight: normal;
   color: lightgrey;
   text-align: right;
+  position: absolute;
+  bottom: 10px;
+  right: 42px;
 }
 
 
