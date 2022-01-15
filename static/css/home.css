@@ -116,20 +116,44 @@ html, body {
   left: 0;
 }
 .trend-article {
-  border: 0.1em solid white;
+  border: 0.1em solid transparent;
   border-radius: 50px;
   color: white;
   margin: 12px;
-  padding: 20px;
+  /* padding: 20px; */
+  padding: 0;
   height: 260px;
+  overflow: hidden;
+  position: relative;
 }
-.trend-article h3 {
+.trend-article p {
   font-size: 18px;
   font-weight: bold;
-}
-.trend-article h3 a {
-  text-decoration: none;
   color: white;
+  margin: 0;
+  padding: 20px;
+  padding-bottom: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  pointer-events: none; 
+}
+.trend-article p span {
+  display: block;
+  line-height: 1.3em;
+}
+.trend-article img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+#source {
+  font-size: 13px;
+  font-weight: normal;
+  color: lightgrey;
+  text-align: right;
 }
 
 

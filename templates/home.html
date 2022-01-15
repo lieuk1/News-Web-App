@@ -27,11 +27,14 @@
             <div class="row">
                 {% for article in article_data.items %}
                 <div class="col trend-article">
-                    <p id="source-date-con">
-                        <span id="source">by {{ article.source }}</span>
+                    <!-- <p id="source-date-con">
                         <span id="publish-date">{{ article.publish_date }}</span>
+                    </p> -->
+                    <p>
+                        <span>{{ article.title }}</span>
+                        <span id="source">{{ article.source }}</span>                        
                     </p>
-                    <h3><a class="title" href="{{ article.url }}">{{ article.title }}</a></h3>
+                    <a href="{{ article.url }}"><img src="{{ article.url_to_image }}" /></a>
                 </div>
                 {% endfor %}
             </div>
