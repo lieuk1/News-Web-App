@@ -38,12 +38,18 @@ def clear_table(conn):
     
 def update_article(article):
     list_article = list(article)
+    title = list_article[2]
     publish_date = list_article[5]
+    
+    # Remove src from end of title
+    src_index = title.rfind(' - ')
+    new_title = title[:src_index]
     
     # Remove info from end of publish_date
     time_index = publish_date.rfind('T')
     new_date = publish_date[:time_index]
     
+    list_article[2] = new_title
     list_article[5] = new_date
     article = tuple(list_article)
     
