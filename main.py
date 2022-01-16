@@ -39,10 +39,12 @@ class TrendingForm(FlaskForm):
         description={'class': 'inputs select'})
 
 
-@app.route("/", methods=['GET', 'POST'], defaults={'page': 1})
-def home(page):
+@app.route("/", methods=['GET', 'POST'])
+def home():
     categories = ["general", "health", "science", "entertainment", "technology", "business", "sports"]
     articles = []
+    
+    page = request.args.get('page', 1, type=int)
     
     for c in categories:
         article_section = Article.query.filter_by(category=c).paginate(page, 8, False)
@@ -50,6 +52,7 @@ def home(page):
 
     return render_template('home.html',
         title='News',
+        page=page,
         lenCat=len(categories),
         categories=categories,
         articles=articles

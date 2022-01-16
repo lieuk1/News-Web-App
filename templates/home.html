@@ -69,20 +69,20 @@
         {% for i in range(0, lenCat) %}
         {% if i == 0 %}
         <div class="tab-pane fade show active" id="{{ categories[i] }}" role="tabpanel" aria-labelledby="{{ categories[i] }}-tab">
-        {% else %}
-        <div class="tab-pane fade" id="{{ categories[i] }}" role="tabpanel" aria-labelledby="{{ categories[i] }}-tab">
-        {% endif %}
-            <div class="articles-container container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-                    {% for article in articles[i].items %}
-                    <div class="article">
-                        <div class="card h-100 article-content">
-                            <div class="article-img">
-                                <img src="{{ article.url_to_image }}" alt="image" />
-                                <span></span>
-                            </div>
-                            <div class="card-body article-info">
-                                <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
+            {% else %}
+            <div class="tab-pane fade" id="{{ categories[i] }}" role="tabpanel" aria-labelledby="{{ categories[i] }}-tab">
+                {% endif %}
+                <div class="articles-container container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                        {% for article in articles[i].items %}
+                        <div class="article">
+                            <div class="card h-100 article-content">
+                                <div class="article-img">
+                                    <img src="{{ article.url_to_image }}" alt="image" />
+                                    <span></span>
+                                </div>
+                                <div class="card-body article-info">
+                                    <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
                                 <p class="article-src text-muted">{{ article.source }}</p>
                                 <p class="article-title"><strong>{{ article.title }}</strong></p>
                             </div>
@@ -95,6 +95,47 @@
                 </div>
             </div>
         </div>
+        {% if i == 0 %}
+        <nav aria-label="page-nav">
+            <ul class="pagination justify-content-center">
+                {% if page != 1 %}
+                <li class="page-item"><a href="{{ url_for('home', page=1) }}" class="page-link">First</a></li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">First</a>
+                </li>
+                {% endif %}
+
+                {% if articles[i].has_prev %}
+                <li class="page-item">
+                    <a href="{{ url_for('home', page=articles[i].prev_num) }}" class="page-link">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                {% endif %}
+
+                <li class="page-item"><a class="page-link" href="#">{{ page }}</a></li>
+
+                {% if articles[i].has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('home', page=articles[i].next_num) }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">Next</a>
+                </li>
+                {% endif %}
+
+                {% if page != articles[i].pages %}
+                <li class="page-item"><a href="{{ url_for('home', page=articles[i].pages) }}" class="page-link">Last</a></li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link">Last</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
         {% endfor %}
     </div>
     <div class="footer-container">
