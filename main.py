@@ -41,28 +41,18 @@ class TrendingForm(FlaskForm):
 
 @app.route("/", methods=['GET', 'POST'], defaults={'page': 1})
 def home(page):
-    trending_form = TrendingForm()
-    general_art = Article.query.filter_by(category="general").paginate(page, 5, False)
-    health_art = Article.query.filter_by(category="health").paginate(page, 8, False)
+    categories = ["general", "health", "science", "entertainment", "technology", "business", "sports"]
+    articles = []
     
-    if trending_form.validate_on_submit():
-        page = request.args.get('page', page, type=int)
-        general_art = Article.query.filter_by(category="general").paginate(page, RESULTS_PER_PAGE, False)
-        total_results = len(Article.query.all())
-        
-        return render_template('headlines.html',
-            title='News',
-            general_art=general_art,
-            health_art=health_art,
-            page=page,
-            keyword=trending_form.keyword.data,
-            category=trending_form.category.data,
-            total_results=total_results)
+    for c in categories:
+        article_section = Article.query.filter_by(category=c).paginate(page, 8, False)
+        articles.append(article_section)
+
     return render_template('home.html',
         title='News',
-        trending_form=trending_form,
-        general_art=general_art,
-        health_art=health_art
+        lenCat=len(categories),
+        categories=categories,
+        articles=articles
         )
 
 

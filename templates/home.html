@@ -25,7 +25,7 @@
         </div>
         <div class="trend-row-con container">
             <div class="row">
-                {% for article in general_art.items %}
+                {% for article in articles[0].items %}
                 <div class="col trend-article">
                     <div class="trend-article-content">
                         <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
@@ -39,61 +39,63 @@
                 {% endfor %}
             </div>
         </div>
-        <!-- Form for trending headlines -->
-        <div class="popup-top-form" id="my-top-form">
-            <form method="POST" action="" class="top-form">
-                {{ trending_form.csrf_token }}  
-                {{ trending_form.keyword(class_=trending_form.keyword.description.class,
-                    placeholder_=trending_form.keyword.description.placeholder) }}
-                {{ trending_form.category(class_=trending_form.category.description.class) }}
-                <input type="submit" class="inputs search" name="submit" value="Search Trending">
-                <input type="button" class="inputs close" value="Close" onclick="closeForm('my-top-form')">
-            </form>
-        </div>
-        <!-- <div class="category-btns-container">
-            <div class="categ-bub-cont">
-                <span><p>Health</p></span>
-                <span><p>Science</p></span>
-                <span><p>Entertainment</p></span>
-                <span><p>Technology</p></span>
-                <span><p>Business</p></span>
-                <span><p>Sports</p></span>
-            </div>
-        </div> -->
     </div>
     <div id="categ-btns-container" class="categ-btns-container">
-        <ul>
-            <li><button>Health</button></li>
-            <li><button>Science</button></li>
-            <li><button>Entertainment</button></li>
-            <li><button>Technology</button></li>
-            <li><button>Business</button></li>
-            <li><button>Sports</button></li>
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="true">Hot</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="health-tab" data-bs-toggle="tab" data-bs-target="#health" type="button" role="tab" aria-controls="health" aria-selected="true">Health</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="science-tab" data-bs-toggle="tab" data-bs-target="#science" type="button" role="tab" aria-controls="science" aria-selected="false">Science</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="entertainment-tab" data-bs-toggle="tab" data-bs-target="#entertainment" type="button" role="tab" aria-controls="entertainment" aria-selected="false">Entertainment</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="technology-tab" data-bs-toggle="tab" data-bs-target="#technology" type="button" role="tab" aria-controls="technology" aria-selected="false">Technology</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="business-tab" data-bs-toggle="tab" data-bs-target="#business" type="button" role="tab" aria-controls="business" aria-selected="false">Business</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="sports-tab" data-bs-toggle="tab" data-bs-target="#sports" type="button" role="tab" aria-controls="sports" aria-selected="false">Sports</button>
+            </li>
         </ul>
     </div>
-    <div class="content-container">
-        <div class="articles-container container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-                {% for article in health_art.items %}
-                <div class="article">
-                    <div class="card h-100 article-content">
-                        <div class="article-img">
-                            <img src="{{ article.url_to_image }}" />
-                            <span></span>
+    <div class="tab-content" id="myTabContent">
+        {% for i in range(0, lenCat) %}
+        {% if i == 0 %}
+        <div class="tab-pane fade show active" id="{{ categories[i] }}" role="tabpanel" aria-labelledby="{{ categories[i] }}-tab">
+        {% else %}
+        <div class="tab-pane fade" id="{{ categories[i] }}" role="tabpanel" aria-labelledby="{{ categories[i] }}-tab">
+        {% endif %}
+            <div class="articles-container container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                    {% for article in articles[i].items %}
+                    <div class="article">
+                        <div class="card h-100 article-content">
+                            <div class="article-img">
+                                <img src="{{ article.url_to_image }}" alt="image" />
+                                <span></span>
+                            </div>
+                            <div class="card-body article-info">
+                                <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
+                                <p class="article-src text-muted">{{ article.source }}</p>
+                                <p class="article-title"><strong>{{ article.title }}</strong></p>
+                            </div>
+                            <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
+                                <span></span>
+                            </a>
                         </div>
-                        <div class="card-body article-info">
-                            <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
-                            <p class="article-src text-muted">{{ article.source }}</p>
-                            <p class="article-title"><strong>{{ article.title }}</strong></p>
-                        </div>
-                        <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
-                            <span></span>
-                        </a>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
+        {% endfor %}
     </div>
     <div class="footer-container">
         <a href="/">Link</a>
