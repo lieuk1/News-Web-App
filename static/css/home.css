@@ -170,22 +170,15 @@ html, body {
   right: 42px;
 }
 
-.content-container {
-  display: flex;
-  justify-content: center;
-}
 .articles-container {
   max-width: 1330px;
 }
 .article {
-  /* width: 332px; */
   margin-bottom: 40px;
 }
 .article-img {
   width: 100%;
   height: 200px;
-  /* border: 0.01em solid transparent; */
-  /* border-radius: 20px; */
   overflow: hidden;
   position: relative;
 }
@@ -226,7 +219,7 @@ html, body {
   z-index: 1;
 }
 .article-info {
-  
+  height: 142px;
 }
 .article-info p {
   display: block;
@@ -235,6 +228,9 @@ html, body {
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+}
+.article-title{
+  margin: 0;
 }
 .article-src {
   font-size: 12px;
