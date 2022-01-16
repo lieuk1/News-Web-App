@@ -102,10 +102,6 @@
 
 <!-- Put all JS in separate file -->
 <script>
-    $('#myTab a').on('click', function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-    })
     function openForm(form_id) {
         hideButtons()
         document.getElementById(form_id).style.display = "block";
