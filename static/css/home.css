@@ -238,11 +238,6 @@ html, body {
 }
 .article-src {
   font-size: 12px;
-  font-weight: normal;
-  color: #333;
-}
-.article-title {
-  font-weight: bold;
 }
 
 .category-btns-container {
