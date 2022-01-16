@@ -25,7 +25,7 @@
         </div>
         <div class="trend-row-con container">
             <div class="row">
-                {% for article in article_data.items %}
+                {% for article in general_art.items %}
                 <div class="col trend-article">
                     <div class="trend-article-content">
                         <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
@@ -72,33 +72,28 @@
         </ul>
     </div>
     <div class="content-container">
-        <p><span>Top Trending</span></p>
-        <div class="carousal-container"></div>
-
-        <p><span>Health</span></p>
-        <div class="carousal-container">
-            <!-- {% for article in article_data.items %}
-            <div class="health-articles">
-                <h3><a class="title" href="{{ article.url }}">{{ article.title }}</a></h3>
-                <p id="source-date-container">
-                    <span id="source">by {{ article.source }}</span>
-                    <span id="publish-date">{{ article.publish_date }}</span>
-                </p>
-                <p>{{ article.description }}</p>
+        <div class="articles-container container">
+            <div class="row">
+                {% for article in health_art.items %}
+                <div class="col-md-2 article">
+                    <div class="article-content">
+                        <div class="article-img">
+                            <img src="{{ article.url_to_image }}" />
+                            <span></span>
+                        </div>
+                        <div class="article-info">
+                            <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
+                            <p class="article-src">{{ article.source }}</p>
+                            <p class="article-title">{{ article.title }}</p>
+                        </div>
+                        <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %} -->
         </div>
-
-        <p><span>Science</span></p>
-        <div class="carousal-container"></div>
-        <p><span>Entertainment</span></p>
-        <div class="carousal-container"></div>
-        <p><span>Technology</span></p>
-        <div class="carousal-container"></div>
-        <p><span>Business</span></p>
-        <div class="carousal-container"></div>
-        <p><span>Sports</span></p>
-        <div class="carousal-container"></div>
     </div>
     <div class="footer-container">
         <a href="/">Link</a>
@@ -107,6 +102,10 @@
 
 <!-- Put all JS in separate file -->
 <script>
+    $('#myTab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
     function openForm(form_id) {
         hideButtons()
         document.getElementById(form_id).style.display = "block";

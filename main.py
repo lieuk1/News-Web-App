@@ -43,7 +43,7 @@ class TrendingForm(FlaskForm):
 def home(page):
     trending_form = TrendingForm()
     general_art = Article.query.filter_by(category="general").paginate(page, 5, False)
-    health_art = Article.query.filter_by(category="health").paginate(page, 10, False)
+    health_art = Article.query.filter_by(category="health").paginate(page, 8, False)
     
     if trending_form.validate_on_submit():
         page = request.args.get('page', page, type=int)
