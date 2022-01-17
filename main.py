@@ -47,7 +47,7 @@ def home():
     page = request.args.get('page', 1, type=int)
     
     for c in categories:
-        article_section = Article.query.filter_by(category=c).paginate(page, 8, False)
+        article_section = Article.query.filter_by(category=c).paginate(page, 12, False)
         articles.append(article_section)
 
     return render_template('home.html',
