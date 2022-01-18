@@ -3,8 +3,7 @@ KRISTELLA LIEU
 9 JUNE 2021
 """
 
-from typing import Optional
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, jsonify, url_for, redirect, session
 from flask_session import Session
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField
@@ -39,12 +38,13 @@ class TrendingForm(FlaskForm):
         description={'class': 'inputs select'})
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
 def home():
     categories = ["general", "health", "science", "entertainment", "technology", "business", "sports"]
     articles = []
     
     page = request.args.get('page', 1, type=int)
+    text = request.args.get('jsdata')
     
     for c in categories:
         article_section = Article.query.filter_by(category=c).paginate(page, 12, False)
@@ -55,8 +55,33 @@ def home():
         page=page,
         lenCat=len(categories),
         categories=categories,
-        articles=articles
+        articles=articles,
+        text=text
         )
+    
+
+# TODO: ensure that route is only accessible through ajax request
+@app.route("/articles", methods=['GET', 'POST'])
+def articles():
+    page = int(request.args.get('page'))    # New page number
+    category = request.args.get('category') # Current category tab
+    action = request.args.get('action')     # Pagination btn action
+    
+    # If paginating to next page
+    if action == "next":
+        page = page + 1
+    # If paginating to previous page
+    elif action == "prev":
+        page = page - 1
+    
+    # Retrieve articles from db
+    articles = Article.query.filter_by(category=category).paginate(page, 12, False)
+
+    return render_template('articles.html',
+        page=page,
+        c=category,
+        articles=articles
+    )
 
 
 @app.route('/headlines', methods=['GET', 'POST'])

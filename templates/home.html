@@ -46,7 +46,7 @@
                 <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="true">Hot</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="health-tab" data-bs-toggle="tab" data-bs-target="#health" type="button" role="tab" aria-controls="health" aria-selected="true">Health</button>
+                <button class="nav-link" id="health-tab" data-bs-toggle="tab" data-bs-target="#health" type="button" role="tab" aria-controls="health" aria-selected="false">Health</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="science-tab" data-bs-toggle="tab" data-bs-target="#science" type="button" role="tab" aria-controls="science" aria-selected="false">Science</button>
@@ -114,11 +114,11 @@
                 <a class="page-link">Previous</a>
             </li>
 
-            <li class="page-item"><a class="page-link" href="#">{{ page }}</a></li>
+            <li class="page-item"><a class="page-link" id="page-num" href="#">{{ page }}</a></li>
 
-            <!-- <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li> -->
+            <li class="page-item">
+                <a class="page-link" id="next1" href="#">Next</a>
+            </li>
             <li class="page-item disabled">
                 <a class="page-link">Next</a>
             </li>
@@ -127,6 +127,7 @@
             <li class="page-item disabled"><a class="page-link">Last</a></li>
         </ul>
     </nav>
+    <button id="next">Next</button>
     <div class="footer-container">
         <a href="/">Link</a>
         <a href="/">Link</a>
@@ -137,11 +138,49 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- Put all JS in separate file -->
 <script>
+    var current_tab;
+    var prev_tab;
+    var tab_val;
+    // TODO: Reset page number when clicking on new tab
     $(document).ready(function() {
-        $("#next").click(function() {
-            
+        $(".nav-tabs button").on("show.bs.tab", function(e) {
+            current_tab = e.target;
+            prev_tab = e.relatedTarget;
         });
     });
+    $("#next").click(function() {
+        if(typeof current_tab === "undefined") {
+            tab_val = "general";
+        }
+        else {
+            tab_val = current_tab["attributes"]["aria-controls"]["value"];
+        }
+        // console.log(current_tab);
+        // console.log(tab_val);
+    });
+
+    $("#next").click(function() {
+        var action = $(this).attr("id");
+        var page = $("#page-num").text();
+        var next_pg = parseInt(page) + 1;
+        console.log(page);
+        console.log(next_pg);
+        console.log(tab_val);
+        $("#page-num").text(`${next_pg}`);
+        $.ajax({
+           url: "/articles",
+           type: "get",
+           data: {category: tab_val, action: action, page: next_pg},
+           success: function(response) {
+            //    console.log(response);
+               $(`#myTabContent div[id='${tab_val}']`).replaceWith(response);
+           },
+           error: function(xhr) {
+               console.log(xhr);
+           }
+        });
+    });
+
     function openForm(form_id) {
         hideButtons()
         document.getElementById(form_id).style.display = "block";
