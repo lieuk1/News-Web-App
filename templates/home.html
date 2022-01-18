@@ -23,22 +23,6 @@
                 </li>
             </ul>
         </div>
-        <div class="trend-row-con container">
-            <div class="row">
-                {% for article in articles[0].items %}
-                <div class="col trend-article">
-                    <div class="trend-article-content">
-                        <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
-                        <p id="title">{{ article.title }}</p>
-                        <p id="source">{{ article.source }}</p>
-                    </div>
-                    <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
-                        <img src="{{ article.url_to_image }}" />
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
     </div>
     <div id="categ-btns-container" class="categ-btns-container">
         <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">

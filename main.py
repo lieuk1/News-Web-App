@@ -38,6 +38,7 @@ class TrendingForm(FlaskForm):
         description={'class': 'inputs select'})
 
 
+@app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def home():
     categories = ["general", "health", "science", "entertainment", "technology", "business", "sports"]
