@@ -42,20 +42,24 @@ class TrendingForm(FlaskForm):
 @app.route("/home", methods=['GET', 'POST'])
 def home():
     categories = ["general", "health", "science", "entertainment", "technology", "business", "sports"]
-    articles = []
+    c_h = {}
+    for i, c in enumerate(categories):
+        c_h.update({c: i})
+        
+    articles = {}
     
     page = request.args.get('page', 1, type=int)
     text = request.args.get('jsdata')
     
     for c in categories:
         article_section = Article.query.filter_by(category=c).paginate(page, 12, False)
-        articles.append(article_section)
+        articles.update({c: article_section})
 
     return render_template('home.html',
         title='News',
         page=page,
         lenCat=len(categories),
-        categories=categories,
+        categories=c_h,
         articles=articles,
         text=text
         )
@@ -64,24 +68,18 @@ def home():
 # TODO: ensure that route is only accessible through ajax request
 @app.route("/articles", methods=['GET', 'POST'])
 def articles():
-    page = int(request.args.get('page'))    # New page number
+    page = int(request.args.get('page'))    # Current page number
     category = request.args.get('category') # Current category tab
-    action = request.args.get('action')     # Pagination btn action
-    
-    # If paginating to next page
-    if action == "next":
-        page = page + 1
-    # If paginating to previous page
-    elif action == "prev":
-        page = page - 1
     
     # Retrieve articles from db
     articles = Article.query.filter_by(category=category).paginate(page, 12, False)
+    print(articles.pages)
 
     return render_template('articles.html',
         page=page,
         c=category,
-        articles=articles
+        articles=articles,
+        pages=articles.pages
     )
 
 

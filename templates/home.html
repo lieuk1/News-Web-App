@@ -50,39 +50,18 @@
         </ul>
     </div>
     <div class="tab-content" id="myTabContent">
-        {% for i in range(0, lenCat) %}
-        {% if i == 0 %}
-        <div class="tab-pane fade show active" id="{{ categories[i] }}" role="tabpanel" aria-labelledby="{{ categories[i] }}-tab">
+        {% for c in categories %}
+        {% if loop.first %}
+        <div class="tab-pane fade show active" id="{{ c }}" role="tabpanel" aria-labelledby="{{ c }}-tab">
         {% else %}
-        <div class="tab-pane fade" id="{{ categories[i] }}" role="tabpanel" aria-labelledby="{{ categories[i] }}-tab">
+        <div class="tab-pane fade" id="{{ c }}" role="tabpanel" aria-labelledby="{{ categories[i] }}-tab">
         {% endif %}
-            <div class="articles-container container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-                    {% for article in articles[i].items %}
-                    <div class="article">
-                        <div class="card h-100 article-content">
-                            <div class="article-img">
-                                <img src="{{ article.url_to_image }}" alt="image" />
-                                <span></span>
-                            </div>
-                            <div class="card-body article-info">
-                                <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
-                            <p class="article-src text-muted">{{ article.source }}</p>
-                            <p class="article-title"><strong>{{ article.title }}</strong></p>
-                            </div>
-                            <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
+            <!-- articles.html -->
         </div>
         {% endfor %}
     </div>
     <nav aria-label="page-nav">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center" data-current-pg="{{ page }}">
             {% if page != 1 %}
             <li class="page-item"><a href="{{ url_for('home', page=1) }}" class="page-link">First</a></li>
             {% else %}
@@ -91,27 +70,19 @@
             </li>
             {% endif %}
 
-            <!-- <li class="page-item">
-                <a href="#" class="page-link">Previous</a>
-            </li> -->
-            <li class="page-item disabled">
-                <a class="page-link">Previous</a>
+            <li class="page-item">
+                <button class="page-link" id="prev" href="#">Previous</button>
             </li>
 
             <li class="page-item"><a class="page-link" id="page-num" href="#">{{ page }}</a></li>
 
             <li class="page-item">
-                <a class="page-link" id="next1" href="#">Next</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link">Next</a>
+                <button class="page-link" id="next" href="#">Next</button>
             </li>
             
-            <!-- <li class="page-item"><a href="#" class="page-link">Last</a></li> -->
             <li class="page-item disabled"><a class="page-link">Last</a></li>
         </ul>
     </nav>
-    <button id="next">Next</button>
     <div class="footer-container">
         <a href="/">Link</a>
         <a href="/">Link</a>
@@ -122,62 +93,83 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- Put all JS in separate file -->
 <script>
-    var current_tab;
-    var prev_tab;
-    var tab_val;
-    // TODO: Reset page number when clicking on new tab
+    var active_tab;
+    var pagination_action;
+    var current_pg;
+    var pages;
+
+    // Document loads
     $(document).ready(function() {
-        $(".nav-tabs button").on("show.bs.tab", function(e) {
-            current_tab = e.target;
-            prev_tab = e.relatedTarget;
-        });
-    });
-    $("#next").click(function() {
-        if(typeof current_tab === "undefined") {
-            tab_val = "general";
-        }
-        else {
-            tab_val = current_tab["attributes"]["aria-controls"]["value"];
-        }
-        // console.log(current_tab);
-        // console.log(tab_val);
+        active_tab = $(".nav-link.active").attr("aria-controls");
+        current_pg = $(".pagination").attr("data-current-pg");
+        ajaxReq(active_tab, current_pg);
+        $("#prev").parent().addClass("disabled");
     });
 
-    $("#next").click(function() {
-        var action = $(this).attr("id");
-        var page = $("#page-num").text();
-        var next_pg = parseInt(page) + 1;
-        console.log(page);
-        console.log(next_pg);
-        console.log(tab_val);
-        $("#page-num").text(`${next_pg}`);
+    // Category tab buttons clicked
+    $(".nav-item button").click(function() {
+        // Set active tab
+        active_tab = $(".nav-link.active").attr("aria-controls");
+
+        // Reset current page number
+        current_pg = 1;
+        $("#page-num").text(`${current_pg}`);
+
+        ajaxReq(active_tab, current_pg);
+
+        // Enable next pagination btn
+        $("#next").parent().removeClass("disabled");
+        // Disable previous pagination btn
+        $("#prev").parent().addClass("disabled");
+    });
+
+    // Pagination buttons clicked
+    $(".page-link").click(function() {
+        pagination_action = $(this).attr("id");
+
+        console.log(current_pg);
+        console.log(pages);
+
+        // If paginating to next page and not on last page, iterate page number
+        if (pagination_action === "next" && current_pg != pages) {
+            // Iterate page number
+            current_pg = parseInt(current_pg) + 1;
+            $("#prev").parent().removeClass("disabled");
+        }
+        // If paginating to prev page and not on first page
+        else if (pagination_action === "prev" && current_pg != 1) {
+            current_pg = parseInt(current_pg) - 1;
+            $("#next").parent().removeClass("disabled");
+        }
+        
+        if (current_pg == pages) {
+            $(this).parent().addClass("disabled");
+        }
+        if (current_pg == 1) {
+            $(this).parent().addClass("disabled");
+        }
+
+        // Update current page number
+        $("#page-num").text(`${current_pg}`);
+        
+        ajaxReq(active_tab, current_pg);
+    });
+
+    function ajaxReq(active_tab, current_pg) {
         $.ajax({
-           url: "/articles",
-           type: "get",
-           data: {category: tab_val, action: action, page: next_pg},
-           success: function(response) {
-            //    console.log(response);
-               $(`#myTabContent div[id='${tab_val}']`).replaceWith(response);
-           },
-           error: function(xhr) {
-               console.log(xhr);
-           }
+            url: "/articles",
+            type: "get",
+            data: {category: active_tab, page: current_pg},
+            success: function(response) {
+                // Update articles
+                $(`#myTabContent div[id='${active_tab}']`).replaceWith(response);
+                // Set total number of pages
+                pages = $(`#myTabContent div[id='${active_tab}']`).attr("data-pages");
+            },
+            error: function(xhr) {
+                console.log(xhr);
+            }
         });
-    });
-
-    function openForm(form_id) {
-        hideButtons()
-        document.getElementById(form_id).style.display = "block";
-    }
-    function closeForm(form_id) {
-        document.getElementById(form_id).style.display = "none";
-        showButtons()
-    }
-    function showButtons() {
-        document.getElementById("trending-btn").style.display = "inline-block";
-    }
-    function hideButtons() {
-        document.getElementById("trending-btn").style.display = "none";
     }
 </script>
 </body>
