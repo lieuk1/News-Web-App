@@ -142,9 +142,11 @@
             $("#next").parent().removeClass("disabled");
         }
         
+        // If next btn clicked and on last page, disable next btn
         if (current_pg == pages) {
             $(this).parent().addClass("disabled");
         }
+        // If prev btn clicked and on first page, disable prev btn
         if (current_pg == 1) {
             $(this).parent().addClass("disabled");
         }
@@ -152,9 +154,16 @@
         // Update current page number
         $("#page-num").text(`${current_pg}`);
         
+        // Update articles
         ajaxReq(active_tab, current_pg);
     });
 
+    /**
+     * Ajax request to update articles in template
+     *
+     * @param {string} active_tab: current category tab
+     * @param {number} current_pg: page number of new articles to retrieve from
+    **/
     function ajaxReq(active_tab, current_pg) {
         $.ajax({
             url: "/articles",
