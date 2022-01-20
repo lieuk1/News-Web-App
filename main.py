@@ -73,7 +73,6 @@ def articles():
     
     # Retrieve articles from db
     articles = Article.query.filter_by(category=category).paginate(page, 12, False)
-    print(articles.pages)
 
     return render_template('articles.html',
         page=page,
