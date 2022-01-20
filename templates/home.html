@@ -12,11 +12,38 @@
 </head>
 <body>
     <div class="landing-container">
+        <div class="">
+            <!-- <h1>Trending Now.</h1> -->
+            <!-- <p>Habitant morbi tristique senectus et netus et malesuada fames ac.</p> -->
+        </div>
+        <div class="accent-bg">
+            {% for article in articles.get("general").items %}
+            {% if loop.index == 4 %}
+            <div class="featured">
+                <div class="card ft-content">
+                    <div class="card-body">
+                        <!-- <p id="publish-date">{{ article.publish_date }}</p> -->
+                        <p class="ft-title"><strong>{{ article.title }}</strong></p>
+                        <p class="ft-src text-muted">{{ article.source }}</p>
+                        <div class="ft-img">
+                            <img src="{{ article.url_to_image }}" alt=" " />
+                            <span></span>
+                        </div>
+                        <p class="ft-desc">{{ article.description }}</p>
+                    </div>
+                    <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
         <!-- Button for trending headlines -->
         <div class="btn-container">
             <ul>
-                <li id="trending-btn" value="trending-btn" onclick="openForm('my-top-form')">
-                    View trending articles
+                <li id="trending-btn" value="trending-btn" onclick="">
+                    View categories
                     <!-- Number of span equals number of bubbles that appear on hover -->
                     <span></span><span></span>
                     <span></span><span></span>
