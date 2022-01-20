@@ -7,7 +7,7 @@ html, body {
 .landing-container {
   height: 100vh;
   width: 100%;
-  /* background-image: url("../landing-bg.jpg"); */
+  /* background-image: url("../waves.svg"); */
   background-size: cover;
   background-position: center;
   background-color: black;
@@ -114,6 +114,11 @@ html, body {
   height: 200px;
   overflow: hidden;
   position: relative;
+  /* Default image */
+  background: url("../default.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .article-img img {
   width: 100%;
