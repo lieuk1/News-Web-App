@@ -96,66 +96,55 @@
     var active_tab;
     var pagination_action;
     var current_pg;
-    var pages;
+    var last_pg;
 
     // Document loads
     $(document).ready(function() {
         active_tab = $(".nav-link.active").attr("aria-controls");
         current_pg = $(".pagination").attr("data-current-pg");
-        ajaxReq(active_tab, current_pg);
-        $("#prev").parent().addClass("disabled");
+        updateArticles(active_tab, current_pg);
+        // Disable previous pagination btn
+        disableBtn($("#prev").parent());
     });
 
     // Category tab buttons clicked
     $(".nav-item button").click(function() {
-        // Set active tab
         active_tab = $(".nav-link.active").attr("aria-controls");
 
         // Reset current page number
         current_pg = 1;
         $("#page-num").text(`${current_pg}`);
 
-        ajaxReq(active_tab, current_pg);
+        updateArticles(active_tab, current_pg);
 
         // Enable next pagination btn
-        $("#next").parent().removeClass("disabled");
+        enableBtn($("#next").parent());
         // Disable previous pagination btn
-        $("#prev").parent().addClass("disabled");
+        disableBtn($("#prev").parent());
     });
 
     // Pagination buttons clicked
     $(".page-link").click(function() {
-        pagination_action = $(this).attr("id");
+        pagination_action = $(this).attr("id"); // = "next" or "prev"
 
-        console.log(current_pg);
-        console.log(pages);
-
-        // If paginating to next page and not on last page, iterate page number
-        if (pagination_action === "next" && current_pg != pages) {
-            // Iterate page number
+        if (pagination_action === "next" && current_pg != last_pg) {
             current_pg = parseInt(current_pg) + 1;
-            $("#prev").parent().removeClass("disabled");
+            enableBtn($("#prev").parent());
         }
-        // If paginating to prev page and not on first page
         else if (pagination_action === "prev" && current_pg != 1) {
             current_pg = parseInt(current_pg) - 1;
-            $("#next").parent().removeClass("disabled");
+            enableBtn($("#next").parent());
         }
         
-        // If next btn clicked and on last page, disable next btn
-        if (current_pg == pages) {
-            $(this).parent().addClass("disabled");
-        }
-        // If prev btn clicked and on first page, disable prev btn
-        if (current_pg == 1) {
-            $(this).parent().addClass("disabled");
+        // If on first or last page, disable clicked btn
+        if (current_pg == last_pg || current_pg == 1) {
+            disableBtn($(this).parent());
         }
 
         // Update current page number
         $("#page-num").text(`${current_pg}`);
         
-        // Update articles
-        ajaxReq(active_tab, current_pg);
+        updateArticles(active_tab, current_pg);
     });
 
     /**
@@ -164,7 +153,7 @@
      * @param {string} active_tab: current category tab
      * @param {number} current_pg: page number of new articles to retrieve from
     **/
-    function ajaxReq(active_tab, current_pg) {
+    function updateArticles(active_tab, current_pg) {
         $.ajax({
             url: "/articles",
             type: "get",
@@ -173,12 +162,20 @@
                 // Update articles
                 $(`#myTabContent div[id='${active_tab}']`).replaceWith(response);
                 // Set total number of pages
-                pages = $(`#myTabContent div[id='${active_tab}']`).attr("data-pages");
+                last_pg = $(`#myTabContent div[id='${active_tab}']`).attr("data-pages");
             },
             error: function(xhr) {
                 console.log(xhr);
             }
         });
+    }
+
+    function enableBtn(btn) {
+        btn.removeClass("disabled");
+    }
+    
+    function disableBtn(btn) {
+        btn.addClass("disabled");
     }
 </script>
 </body>
