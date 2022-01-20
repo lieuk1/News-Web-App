@@ -115,10 +115,7 @@ html, body {
   overflow: hidden;
   position: relative;
   /* Default image */
-  background: url("../default.jpg");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: white;
 }
 .article-img img {
   width: 100%;
