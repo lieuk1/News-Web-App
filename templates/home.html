@@ -11,14 +11,25 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <div class="landing-container">
-        <div class="">
-            <!-- <h1>Trending Now.</h1> -->
-            <!-- <p>Habitant morbi tristique senectus et netus et malesuada fames ac.</p> -->
+    <div class="landing-container container-fluid">
+        <div class="main">
+            <h1>Trending Now.</h1>
+            <p>Habitant morbi tristique senectus et netus et malesuada fames ac.</p>
+            <!-- Button for trending headlines -->
+            <div class="btn-container">
+                <ul>
+                    <li id="trending-btn" value="trending-btn" onclick="">
+                        View categories
+                        <!-- Number of span equals number of bubbles that appear on hover -->
+                        <span></span><span></span>
+                        <span></span><span></span>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="accent-bg">
             {% for article in articles.get("general").items %}
-            {% if loop.index == 4 %}
+            {% if loop.index == 12 %}
             <div class="featured">
                 <div class="card ft-content">
                     <div class="card-body">
@@ -38,17 +49,6 @@
             </div>
             {% endif %}
             {% endfor %}
-        </div>
-        <!-- Button for trending headlines -->
-        <div class="btn-container">
-            <ul>
-                <li id="trending-btn" value="trending-btn" onclick="">
-                    View categories
-                    <!-- Number of span equals number of bubbles that appear on hover -->
-                    <span></span><span></span>
-                    <span></span><span></span>
-                </li>
-            </ul>
         </div>
     </div>
     <div id="categ-btns-container" class="categ-btns-container">
