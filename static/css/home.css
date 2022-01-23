@@ -9,7 +9,7 @@ html, body {
 
 .landing-container {
   /* Landing page */
-  height: 1000px;
+  /* height: 1000px; */
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -276,4 +276,29 @@ html, body {
   /* Footer */
   height: 25vh;
   background-color: black;
+}
+
+/* @include media-breakpoint-between(xs, md) */
+@media (max-width: 991.98px) {
+  .land-main {
+    display: block;
+    margin: 0 0 40px 0;
+  }
+  .land-text, 
+  .land-desc,
+  .btn-container {
+    position: static;
+    width: 100%;
+    text-align: center;
+  }
+  .land-text {
+    margin: 0 0 40px 0;
+    padding: 0 24px;
+  }
+  .land-title {
+    font-size: 2.5em;
+  }
+  .row.landing-articles {
+    margin: 0;
+  }
 }

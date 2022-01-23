@@ -30,7 +30,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-4">
+        <div class="col-lg-4 col-xs-12">
           <div class="land-main">
             <div class="land-text">
               <h1 class="land-title">Trending Now.</h1>
@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-        <div class="col-8">
+        <div class="col-lg-8 col-xs-12">
           <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 landing-articles">
             {% for article in articles.get("general").items %}
               {% if loop.index <= 4 %}
