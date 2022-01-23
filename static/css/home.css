@@ -59,6 +59,10 @@ html, body {
   line-height: 1.1em;
   width: 80%;
   color: var(--accent);
+  transition: 0.2s;
+}
+.land-desc:hover {
+  color: darkorange;
 }
 .land-title, .land-desc {
   margin: 0;
@@ -103,69 +107,24 @@ html, body {
 .btn-container {
   position: absolute;
   bottom: 16%;
+  left: 14%;
 }
-.btn-container ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.btn-container ul li {
+#jump-btn {
   /* Landing page button */
   --accent: orange;
-  display: inline-block;
-  border: 0.1em solid var(--accent);
+  border: 0em solid var(--accent);
   border-radius: 0.1em;
   color: var(--accent);
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 2.5em;
-  width: 14em;
-  height: 2.5em;
   font-size: 16px;
   font-weight: bold;
-  position: relative;
-  z-index: 1;
-  overflow: hidden; /* Hides span elements */
-  transition: 0.5s;
+  transition: 0.2s;
+  background-color: transparent;
 }
-.btn-container ul li span {
-  /* Bubbles */
-  width: 25%;
-  height: 100%;
-  background-color: var(--accent);
-  border-radius: 50%;
-  position: absolute;
-  /* Calc position of each span based on its number */
-  left: calc((var(--n) - 1) * 25%); 
-  transform: translateY(150%);
-  transition: 0.5s;
-  /* Calc trans delay of each span based on its number */
-  transition-delay: calc((var(--n) - 1) * 0.1s);
-  z-index: -1;
+#jump-btn:hover {
+  color: darkorange;
 }
-.btn-container ul li:hover {
-  color: white;
-  cursor: pointer;
-}
-.btn-container ul li:hover span {
-  /* Make bubbles appear when hover */
-  transform: translateY(0) scale(2);
-}
-.btn-container ul li span:nth-child(1) {
-  /* First bubble */
-  --n: 1; 
-}
-.btn-container ul li span:nth-child(2) {
-  /* Second bubble */
-  --n: 2;
-}
-.btn-container ul li span:nth-child(3) {
-  /* Third bubble */
-  --n: 3;
-}
-.btn-container ul li span:nth-child(4) {
-  /* Fourth bubble */
-  --n: 4;
+#jump-btn span {
+  display: block;
 }
 
 .categ-btns-container {
