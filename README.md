@@ -35,7 +35,7 @@
   
   <h3 align="center"><strong>News Web App</strong></h3>
   <p>
-    <p>A simple and free news web application</p>
+    <p>A simple news web application</p>
     <a href="https://github.com/lieuk1/News-Web-App"><strong>Explore the docs »</strong></a>
     <br />
     <br />
@@ -80,21 +80,20 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
-
 **News Web App**
+
+![Product Screenshot](static/product-screenshot.png)
 
 
 
 ### Built With
 
-* [Python]()
-* [Flask]()
-* [JavaScript/JQuery/Ajax]()
-* [SQL/SQLite]()
-* [Bootstrap]()
-* [HTML]()
-* [CSS]()
+* [Python](https://www.python.org/)
+* [Flask](https://pypi.org/project/Flask/)
+* [JavaScript (jQuery, AJAX)](https://developer.mozilla.org/en-US/docs/Web/javascript)
+* [SQL & SQLite](https://docs.python.org/3/library/sqlite3.html)
+* [Bootstrap](https://getbootstrap.com/)
+* [HTML & CSS](https://www.w3schools.com/html/default.asp)
 
 
 
@@ -105,34 +104,35 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-- 
-  
-  ```sh
-  
-  ```
+If you haven't done so already, install the following:
+- Python
+- [pip](https://pip.pypa.io/en/stable/installation/)
+- [virtualenv](https://www.tutorialspoint.com/flask/flask_environment.htm)
+
 
 ### Installation
 
-1. Get a free [News API key]() 
+1. Get a free [News API key](https://newsapi.org) 
 2. Clone the repo
    
    ```sh
    git clone https://github.com/lieuk1/News-Web-App.git
    ```
-3. Install ...
+3. Install virtualenv in the project directory and activate it
+4. Install packages from `requirements.txt`
    
    ```sh
-   
+   pip install -r requirements.txt
    ```
-4. Create a `.env` file in the root project directory (often the same folder as `.gitignore` and `README.md`)
-5. Enter your API key in `.env`
+5. Create a `.env` file in the root project directory (often the same folder as `.gitignore` and `README.md`)
+6. Enter your API key in `.env`
    
    ```.env
     api_key=your_key
     FLASK_APP=main.py
     FLASK_ENV=development
    ```
-6. Add `.env` to the end of the `.gitignore` file
+7. Add `.env` to the end of the `.gitignore` file
    
    ```.gitignore
    # sqlite database
@@ -149,36 +149,29 @@ To get a local copy up and running follow these simple example steps.
 
 <!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 -->
-_For a complete overview of usage examples, please refer to the [Documentation]()_
+<!-- _For a complete overview of usage examples, please refer to the [Documentation]()_ -->
 
 ### Available Scripts
 
 In the project directory, you can run:
 
 ### `flask run`
+or
+### `python main.py`
 
-Runs the app in the development mode.\
-Open [link]() to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Open the link provided in the command line to view it in the browser. \
+You will see any lint errors in the console.
 
-### Current Design
-
-![UI Picture](public/readme-ui-pic.PNG)
 
 
 <!-- ROADMAP -->
-<!-- ## Roadmap -->
+## Roadmap
 
-<!-- - [] Feature 1
-- [] Feature 2
-- [] Feature 3
-    - [] Nested Feature -->
+- ****Currently in the process of deployment.**
+  - Come back soon to view the demo!
 
-<!-- See the [open issues](https://github.com/lieuk1/News-Web-App/issues) for a full list of proposed features (and known issues). -->
-
-<!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
+See the [open issues](https://github.com/lieuk1/News-Web-App/issues) for a full list of proposed features (and known issues).
 
 
 
