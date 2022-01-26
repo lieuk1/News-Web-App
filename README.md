@@ -29,17 +29,13 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/lieuk1/News-Web-App">
-    <img src="public/readme-logo.png" alt="Logo" width="64" height="64">
-  </a>
-  
   <h3 align="center"><strong>News Web App</strong></h3>
   <p>
     <p>A simple news web application</p>
     <a href="https://github.com/lieuk1/News-Web-App"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="#usage">View Demo</a>
+    <a href="#roadmap">View Demo</a>
     -
     <a href="https://github.com/lieuk1/News-Web-App/issues">Report Bug</a>
     -
